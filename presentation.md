@@ -416,6 +416,24 @@ fn main() {
     check_last::<u8>(&[]);
 }
 ```
+<!-- end_slide -->
+Strings
+---
+
+Rust has many types of strings
+- `&str` and `&'static str`
+- `String`
+- `OsStr`
+- `OsString`
+- `CStr`
+- `CString`
+- `Path`
+- `PathBuf`
+
+- `&[u8]`
+<!-- pause  -->
+
+Rust strings tends to be abit tedoius to work with, but you end up doing it correctly.
 
 <!-- end_slide -->
 Cargo
@@ -473,13 +491,23 @@ Stability
 
 Rust guarantees that any code that compiles with a stable version of the compiler will compile with all later versions of the compiler.
 
+<!-- pause  -->
+
 There is a new release of Rust every 6 weeks.
+
+<!-- pause  -->
 
 To ensure that changes can be made, there are editions. The `rustc` compiler knows how to compile its current edition and all older editions.
 
+<!-- pause  -->
+
 The current edition is 2021. The 2024 edition is in its final stages and is going to be released 20 February 2025 in version 1.85.0.
 
+<!-- pause  -->
+
 An edition is defined on a crate level, with cross-edition builds being fully supported.
+
+<!-- pause  -->
 
 Upgrading to the next edition is automated by running `cargo fix --edition`.
 
