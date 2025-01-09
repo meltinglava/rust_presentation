@@ -216,7 +216,37 @@ enum Result<T, E> {
 ```
 <!-- end_slide -->
 
-Using enums
+Traits
+---
+
+A trait describes some functionality / capability. Think of them abit like java interfaces.
+It is used mostly with generics and is crutial to safety.
+
+
+
+Common traits
+- `Copy`
+- `Clone`
+- `Iterator`
+- `Sync`
+- `Send`
+- `Drop`
+- `From` and `Into`
+- `Default`
+- `Display`
+- `Debug`
+- `Hash`
+- `Eq` and `PartialEq`
+- `Ord` and `PartialOrd`
+
+<!-- end_slide -->
+Statments
+---
+
+Rust is a statment based language. `;` is used to seperate statments. The last statment in a block is returned.
+
+<!-- end_slide -->
+Using enums + generics + statments
 ---
 
 ```rust +exec +line_numbers
@@ -255,7 +285,30 @@ fn read_length_of_file<P: AsRef<Path>>(path: P) -> io::Result<u64> {
 }
 
 fn main() -> io::Result<()> {
+    println!("File length is: {}", read_length_of_file("presentation.md")?);
     println!("File length is: {}", read_length_of_file("This file does not exsist")?);
+    Ok(())
+}
+```
+
+lambdas
+
+```rust +exec +line_numbers
+use std::{io::{self, BufReader, BufRead}, fs::File, path::Path};
+
+fn number_of_lines_starting_with_f<P: AsRef<Path>>(path: P) -> io::Result<usize> {
+    let file = File::open(path)?;
+    let reader = BufReader::new(file);
+    let count = reader
+        .lines()
+        .map(Result::unwrap)
+        .filter(|line| line.trim().starts_with('f'))
+        .count();
+    Ok(count)
+}
+
+fn main() -> io::Result<()> {
+    println!("Lines that start with 'f': {}", number_of_lines_starting_with_f("presentation.md")?);
     Ok(())
 }
 ```
@@ -289,9 +342,8 @@ Cargo
 
 Cargo is rust's build system and dependencies manager.
 
-```bash
-cargo new demo_for_presentation
-```
+`cargo new demo_for_presentation`
+
 
 The defualt directory structure:
 ```bash +exec_replace
@@ -316,10 +368,10 @@ cargo clean --manifest-path demo_for_presentation/Cargo.toml > /dev/null 2>&1
 cargo run --release --manifest-path demo_for_presentation/Cargo.toml --color=always
 ```
 
-To install `rust` and `cargo` use `rustup`. `rustup` is the toolchain manager for rust.
+To install `rustc` and `cargo` use `rustup`. `rustup` is the toolchain manager for rust.
 
 Get `rustup` from either:
- - Package manager of choise
+ - Package manager of choise if avalible
  - [](https://rustup.rs/)
 
 <!-- end_slide -->
@@ -332,7 +384,7 @@ This means that you can always upgrade your compiler to get the latest features,
 
 There is a new release of rust every 6 weeks.
 
-To ensure that changes can be made, there is edition. The rustc compiler knows how to compile its current edition and all older edition.
+To ensure that changes can be made, there is editions. The rustc compiler knows how to compile its current edition and all older editions.
 
 The current edition is 2021. The 2024 edition is in its final stages and are going to be released 20 February 2025 in version 1.85.0.
 
@@ -358,7 +410,6 @@ This is what [](https://rust-lang.org) has to say.
 - Eliminates many classes of bugs at compile-time.
 
 #### Productivity
-Rust enhances developer experience with:
 - Excellent documentation.
 - Friendly compiler & clear error messages.
 - Top-notch tooling:
@@ -394,11 +445,11 @@ Unsafe allows three things.
  3. Dereference a raw pointer.
 
 ### The overarching usecase.
-There is some invariant (usually runtime reliant), that makes this ideom safe. (think vector, mutex)
+There is some invariant (usually runtime reliant), that makes this ideom safe. (think vector, mutex...)
 
 
 ### When writing unsafe code
-- One have to make sure that any unsafe code is valid for ANY and ALL safe code. 
+- One have to make sure that any unsafe code is valid for ANY and ALL safe code.
 - One can use the garanties / rules of safe rust code to make safe `unsafe` abstractions.
 
 <!-- end_slide -->
@@ -433,28 +484,13 @@ Demo time
 
 In this demo we are going to do an easy normal task, see where it fails, to then fix it properly.
 
-```rust +line_numbers
-// main.rs
-fn main() {
-    let values = 40;
-    let sum: usize = fib::Fib::default()
-        .take(40)
-        .sum();
-    println!("Sum of the frist {} values in fibonacci: {}", values, sum);
-}
-```
+<!-- end_slide -->
+Closing remarks
+---
 
-```rust +line_numbers
-// main.rs
-pub struct Fib {
-    current: usize,
-    former: usize,
-    count: usize,
-}
-
-impl Fib {
-    fn new(current: usize, former: usize) -> Self {
-        
-    }
-}
-```
+### If you want to start with rust:
+- Do not be afraid to use clone / unwrap in the start.
+- Rust is going to force you to think different about problems.
+- You are going to have time where you "fight" the compiler.
+  - If you feel that the comiler really fights you, you should consider how your model is affecting you.
+- Program to only have your valid state be representable.
