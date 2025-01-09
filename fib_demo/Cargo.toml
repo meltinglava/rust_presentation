@@ -1,0 +1,40 @@
+[package]
+name = "fib_demo"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name="first"
+path="src/first.rs"
+
+[[bin]]
+name="second"
+path="src/second.rs"
+
+[[bin]]
+name="third"
+path="src/third.rs"
+
+[[bin]]
+name="fourth"
+path="src/fourth.rs"
+
+[[bin]]
+name="fifth"
+path="src/fifth.rs"
+
+[[bin]]
+name="sixth"
+path="src/sixth.rs"
+
+[[bin]]
+name="seventh"
+path="src/seventh.rs"
+required-features= ["num"]
+
+[dependencies]
+num = { version = "0.4.3", optional = true }
+
+[features]
+default = ["num"]
+num = ["dep:num"]
