@@ -1,8 +1,8 @@
 use num::BigUint;
 
 mod fib {
+    use num::{One, Zero};
     use std::ops::AddAssign;
-    use num::{Zero, One};
 
     pub struct Fib<T> {
         current: T,
@@ -28,7 +28,7 @@ mod fib {
 
     impl<T> Iterator for Fib<T>
     where
-        T: for<'a> AddAssign<&'a T> + Clone
+        T: for<'a> AddAssign<&'a T> + Clone,
     {
         type Item = T;
 
@@ -50,9 +50,7 @@ mod fib {
 fn main() {
     let values = 1000;
     let fibs = fib::Fib::<BigUint>::default();
-    let sum: BigUint = fibs
-        .take(values)
-        .sum();
+    let sum: BigUint = fibs.take(values).sum();
     println!("Sum of the frist {} values in fibonacci: {}", values, sum);
 }
 

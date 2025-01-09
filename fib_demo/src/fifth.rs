@@ -1,4 +1,4 @@
-mod fib{
+mod fib {
     pub struct Fib<T> {
         current: T,
         former: T,
@@ -41,9 +41,7 @@ mod fib{
 
 fn main() {
     let values = 100;
-    let sum: usize = fib::Fib::new(0, 1)
-        .take(values)
-        .sum();
+    let sum: usize = fib::Fib::new(0, 1).take(values).sum();
     println!("Sum of the frist {} values in fibonacci: {}", values, sum);
 }
 
