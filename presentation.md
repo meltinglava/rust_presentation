@@ -1,5 +1,5 @@
 ---
-title: What is rust?
+title: What is Rust?
 sub_title: What is this language that everyone talks about, and a look at some features?
 author: Roald Strangstadstuen
 theme:
@@ -12,44 +12,43 @@ theme:
 This presentation
 ---
 
-* What is rust?
-* How to do memory safety without a garbage collection 
+* What is Rust?
+* How to do memory safety without a garbage collector 
 * Some cool features
-* Rust goals (speed, safety and productivity)
+* Rust goals (speed, safety, and productivity)
 * unsafe
-* When to use / not use rust
+* When to use / not use Rust
 * Demo time
 
 <!-- end_slide -->
 
-What is rust?
+What is Rust?
 ---
 
-* Rust is a general purpous, system level programming language
+* Rust is a general-purpose, systems-level programming language.
 <!-- pause  -->
-* Was started by Mozilla, with version 1.0 released in May 2015.
+* It was started by Mozilla, with version 1.0 released in May 2015.
 
 <!-- end_slide -->
-Rusts memory safety
+Rust’s memory safety
 ---
 
 Ownership and borrowing
 
-* All values has one uniqe owner.
+* All values have one unique owner.
 <!-- pause  -->
-* The owner is resposible for freeing the underlying value once it goes out of
-  scope.
+* The owner is responsible for freeing the underlying value once it goes out of scope.
 <!-- pause  -->
-* There are three ways of values be trasfered:
+* There are three ways values can be transferred:
   1. Transfer of ownership
-  2. Immutable boorow(s)
+  2. Immutable borrow(s)
   3. Mutable borrow
 
 <!-- pause  -->
 Lifetimes
 
-* All owned values has a lifetime
-  * The lifetime of all references cannot outlive the lifetime of the owner
+* All owned values have a lifetime
+  * The lifetime of any reference cannot outlive the lifetime of the owner
 
 <!-- end_slide -->
 
@@ -189,13 +188,14 @@ fn main() {
 Safe code
 ---
 
-These rules being enforced at compile time eliminates classes of memory bugs for beeing possible.
+These rules, enforced at compile time, eliminate entire classes of memory bugs from being possible.
 
 Example of bugs not possible:
 - Use after free
 - Double free
-- Dangeling pointers
+- Dangling pointers
 - Data races (with and without multi-threading)
+
 <!-- end_slide -->
 
 Rust enums
@@ -216,7 +216,7 @@ enum ApplicationState {
 <!-- pause  -->
 <!-- column: 1 -->
 
-But they have a powerful feature that a variant can hold a value.
+But they have a powerful feature: a variant can hold a value.
 
 ```rust {all|3,5|all} +line_numbers
 enum ApplicationState {
@@ -230,7 +230,7 @@ enum ApplicationState {
 <!-- column_layout: [1] -->
 <!-- column: 0 -->
 
-Rust does not have any `null` like ideom by itself, but one can use an enum to atchive the same.
+Rust does not have any `null`-like idiom by itself, but one can use an enum to achieve the same.
 
 <!-- pause  -->
 <!-- column_layout: [1, 1] -->
@@ -258,8 +258,8 @@ enum Result<T, E> {
 Traits
 ---
 
-A trait describes some functionality / capability. Think of them abit like java interfaces.
-It is used mostly with generics and is crutial to safety.
+A trait describes some functionality or capability. Think of them a bit like Java interfaces.  
+They are used mostly with generics and are crucial to safety.
 
 <!-- pause  -->
 
@@ -289,7 +289,7 @@ Common traits
 Expressions
 ---
 
-Rust is a expression based language. `;` is used to seperate Expressions. The last expression in a block is returned.
+Rust is an expression-based language. `;` is used to separate expressions. The last expression in a block is returned.
 <!-- pause  -->
 
 <!-- column_layout: [1, 1] -->
@@ -320,7 +320,7 @@ fn main() {
 ```
 
 <!-- end_slide -->
-Using enums + generics + statments
+Using enums + generics + statements
 ---
 <!-- pause  -->
 <!-- column_layout: [3, 4] -->
@@ -351,8 +351,6 @@ There are even specialized versions:
 type Result<T> = Result<T, io::Error>;
 ```
 
-
-
 example:
 ```rust {all|3-8|3|4-7|11-12|all} +exec +line_numbers
 use std::{io, fs::File, path::Path};
@@ -366,7 +364,7 @@ fn read_length_of_file<P: AsRef<Path>>(path: P) -> io::Result<u64> {
 
 fn main() -> io::Result<()> {
     println!("File length is: {}", read_length_of_file("presentation.md")?);
-    println!("File length is: {}", read_length_of_file("This file does not exsist")?);
+    println!("File length is: {}", read_length_of_file("This file does not exist")?);
     Ok(())
 }
 ```
@@ -423,17 +421,16 @@ fn main() {
 Cargo
 ---
 
-Cargo is rust's build system and dependencies manager.
+Cargo is Rust’s build system and dependency manager.
 
 `cargo new demo_for_presentation`
 
-
 <!-- pause  -->
-The defualt directory structure:
+The default directory structure:
 ```bash +exec_replace
 cargo clean --manifest-path demo_for_presentation/Cargo.toml > /dev/null 2>&1
 rm -f demo_for_presentation/Cargo.lock
-eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation # -I does not work
+eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation
 ```
 
 <!-- pause  -->
@@ -464,36 +461,27 @@ cargo run --release --manifest-path demo_for_presentation/Cargo.toml --color=alw
 ```
 
 <!-- pause  -->
-To install `rustc` and `cargo` use `rustup`. `rustup` is the toolchain manager for rust.
+To install `rustc` and `cargo` use `rustup`. `rustup` is the toolchain manager for Rust.
 
 Get `rustup` from either:
- - Package manager of choise if avalible
  - [](https://rustup.rs/)
+ - Package manager of choice if available
 
 <!-- end_slide -->
 Stability
 ---
 
-<!-- pause  -->
-Rust garanties that any code that compiles with a stable version of the compiler, shall compile with all later versions of the compiler.
+Rust guarantees that any code that compiles with a stable version of the compiler will compile with all later versions of the compiler.
 
-<!-- pause  -->
-This means that you can always upgrade your compiler to get the latest features, bug fixes, better build preformace...
+There is a new release of Rust every 6 weeks.
 
-<!-- pause  -->
-There is a new release of rust every 6 weeks.
+To ensure that changes can be made, there are editions. The `rustc` compiler knows how to compile its current edition and all older editions.
 
-<!-- pause  -->
-To ensure that changes can be made, there is editions. The rustc compiler knows how to compile its current edition and all older editions.
+The current edition is 2021. The 2024 edition is in its final stages and is going to be released 20 February 2025 in version 1.85.0.
 
-<!-- pause  -->
-The current edition is 2021. The 2024 edition is in its final stages and are going to be released 20 February 2025 in version 1.85.0.
+An edition is defined on a crate level, with cross-edition builds being fully supported.
 
-<!-- pause  -->
-An edition is defined on a crate level, with cross edition builds being fully supported.
-
-<!-- pause  -->
-Upgrading to the next edition is automated by running `cargo fix --edition`
+Upgrading to the next edition is automated by running `cargo fix --edition`.
 
 <!-- end_slide -->
 Why Rust
@@ -508,7 +496,6 @@ This is what [](https://rust-lang.org) has to say.
 
 <!-- pause  -->
 #### Reliability
-
 - Memory-safety.
 - Thread-safety.
 - Eliminates many classes of bugs at compile-time.
@@ -519,22 +506,22 @@ This is what [](https://rust-lang.org) has to say.
 - Friendly compiler & clear error messages.
 - Top-notch tooling:
   - Integrated package manager and build tool.
-  - Exelent multi-editor support.
+  - Excellent multi-editor support.
   - Auto-completion, type inspections, and auto-formatting.
   - And more...
 
 <!-- end_slide -->
-Should you write it in rust?
+Should you write it in Rust?
 ---
 
 #### Common blockers
 - Missing core library for the target domain.
-  - GUI-s [](https://areweguiyet.com/)
+  - GUIs? [https://areweguiyet.com/](https://areweguiyet.com/)
 - Demand for knowledge (developers) currently higher than the supply.
 
 <!-- pause  -->
 #### However
-- If your target domain includes something that somewhat resembles the ownership model of rust, you should probably write it in rust.
+- If your target domain includes something that somewhat resembles Rust’s ownership model, you should probably write it in Rust.
 
 <!-- pause  -->
 ##### Note.
@@ -553,21 +540,21 @@ Unsafe allows three things.
  3. Dereference a raw pointer.
 
 <!-- pause  -->
-### The overarching usecase.
-There is some invariant (usually runtime reliant), that makes this ideom safe. (think vector, mutex...)
-
+### The overarching use case
+There is some invariant (usually runtime reliant) that makes this idiom safe. (think vector, mutex...)
 
 <!-- pause  -->
 ### When writing unsafe code
-- One have to make sure that any unsafe code is valid for ANY and ALL safe code.
 <!-- pause  -->
-- One can use the garanties / rules of safe rust code to make safe `unsafe` abstractions.
+- One has to make sure that any unsafe code is valid for ANY and ALL safe code.
+<!-- pause  -->
+- One can use the guarantees / rules of safe Rust code to make safe `unsafe` abstractions.
 
 <!-- end_slide -->
-Following the rules of rust.
+Following the rules of Rust.
 ---
 
-Because of the rules (espesially ownership / borrowing) of rust, one can get nice api-s that is not possible in other languages. 
+Because of the rules (especially ownership / borrowing) of Rust, one can get nice APIs that are not possible in other languages.
 
 <!-- pause  -->
 #### [`HashMap::entry`](https://doc.rust-lang.org/stable/std/collections/hash_map/struct.HashMap.html#method.entry)
@@ -575,27 +562,25 @@ Because of the rules (espesially ownership / borrowing) of rust, one can get nic
 
 <!-- pause  -->
 #### [`Mutex`](https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html)
-- The mutex type in rust takes ownership of the value that it protects.
-  - Unlike most other languages where a mutex is just a lock that locks itself.
-    - Hence there is nothing connecting the mutex to the value and it is easy to suddenly read the value without having locked the lock.
-- The `Mutex::lock` method returns a `MutexGuard` containg a mutable reference to the protected value.
-  - When the `MutexGuard` is dropped it releases the lock (simular to cpp mutexguard).
-    - As the mutable reference is owned by the `MutexGuard`, there cannot be any references left behind after its been dropped.
+- The mutex type in Rust takes ownership of the value that it protects.
+  - Unlike most other languages where a mutex is just a lock that locks itself, meaning there is nothing connecting the mutex to the value, so it's easy to read the value without having locked the lock.
+- The `Mutex::lock` method returns a `MutexGuard` containing a mutable reference to the protected value.
+  - When the `MutexGuard` is dropped it releases the lock (similar to C++'s std::lock_guard).
+    - As the mutable reference is owned by the `MutexGuard`, there cannot be any references left behind after it's dropped.
 
 <!-- end_slide -->
-Why does people like to write rust.
+Why do people like to write Rust?
 ---
 
-1. Errors at compile time vs at runtime.
-2. Sense that the code they write are correct.
+1. Errors at compile time vs. at runtime.
+2. Sense that the code they write is correct.
 3. Low tradeoffs.
-
 
 <!-- end_slide -->
 Demo time
 ---
 
-In this demo we are going to do an easy normal task, see where it fails, to then fix it properly.
+In this demo we are going to do an easy normal task (Fibonacci), see where it fails, then fix it properly.
 
 <!-- end_slide -->
 Fibonacci
@@ -715,9 +700,11 @@ cargo run --color=always --manifest-path=fib_demo/Cargo.toml --bin=seventh
 Closing remarks
 ---
 
-### If you want to start with rust:
-- Do not be afraid to use clone / unwrap in the start.
-- Rust is going to force you to think different about problems.
-- You are going to have time where you "fight" the compiler.
-  - If you feel that the comiler really fights you, you should consider how your model is affecting you.
-- Program to only have your valid state be representable.
+### If you want to start with Rust:
+- Do not be afraid to use clone / unwrap at the start.
+- Rust is going to force you to think differently about problems.
+- You are going to have times where you "fight" the compiler.
+  - If you feel that the compiler really fights you, you should consider how your model is affecting you.
+- Program so that only valid states are representable.
+
+<!-- end_slide -->
