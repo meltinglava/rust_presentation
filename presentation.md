@@ -51,7 +51,8 @@ Lifetimes
 
 Ownership
 ---
-
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
 ```rust +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
@@ -61,7 +62,7 @@ fn main() {
     println!("{:?}", b);
 }
 ```
-
+<!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
@@ -78,7 +79,8 @@ fn main() {
 
 Immutable borrowing
 ---
-
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
 ```rust +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
@@ -90,7 +92,7 @@ fn main() {
     println!("{:?}", c);
 }
 ```
-
+<!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
@@ -109,6 +111,8 @@ fn main() {
 
 Mutable borrowing
 ---
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
 
 ```rust +exec +line_numbers
 fn main() {
@@ -122,7 +126,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
-
+<!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -131,7 +135,7 @@ fn main() {
     let c = &mut v;
 
     b.push(4);
-    c.push(4);
+    c.push(5);
 
     println!("{:?}", b);
     println!("{:?}", c);
@@ -141,6 +145,8 @@ fn main() {
 <!-- end_slide -->
 More mutable borrowing
 ---
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
 ```rust +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -154,14 +160,14 @@ fn main() {
     println!("{:?}", c);
 }
 ```
-
-
+<!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
     let b = &mut v;
     b.push(4);
+    println!("{:?}", v);
 
     let c = &mut v;
     c.push(5);
@@ -177,6 +183,8 @@ TODO: Explain why this helps you.
 
 Rust enums
 ---
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
 
 Rust enums can look like normal enums.
 ```rust +line_numbers
@@ -188,6 +196,8 @@ enum ApplicationState {
 }
 ```
 
+<!-- column: 1 -->
+
 But they have a powerful feature that a variant can hold a value.
 
 ```rust +line_numbers
@@ -198,8 +208,15 @@ enum ApplicationState {
     Failed(String),
 }
 ```
+<!-- column_layout: [1] -->
+<!-- column: 0 -->
 
-Rust does not have any `null` like ideom by itself, but one can use an enum to atchive the same. This is so common that the standard library includes one:
+Rust does not have any `null` like ideom by itself, but one can use an enum to atchive the same.
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+
+This is so common that the standard library includes it:
 
 ```rust +line_numbers
 enum Option<T> {
@@ -207,6 +224,7 @@ enum Option<T> {
     None,
 }
 ```
+<!-- column: 1 -->
 and its sibling
 ```rust +line_numbers
 enum Result<T, E> {
@@ -240,14 +258,42 @@ Common traits
 - `Ord` and `PartialOrd`
 
 <!-- end_slide -->
-Statments
+Expressions
 ---
 
-Rust is a statment based language. `;` is used to seperate statments. The last statment in a block is returned.
+Rust is a expression based language. `;` is used to seperate Expressions. The last expression in a block is returned.
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+
+```rust +exec +line_numbers
+fn main() {
+    let something = true;
+    let a = if something {
+        "Good"
+    } else {
+        "Bad"
+    };
+    println!("{}", a);
+}
+```
+<!-- column: 1 -->
+```rust +exec +line_numbers
+fn main() {
+    let something = true;
+    let a = match something {
+        true => "Good",
+        false => "Bad",
+    };
+    println!("{}", a);
+}
+```
 
 <!-- end_slide -->
 Using enums + generics + statments
 ---
+<!-- column_layout: [3, 4] -->
+<!-- column: 0 -->
 
 ```rust +exec +line_numbers
 fn check_last(s: &[u32]) {
@@ -265,12 +311,14 @@ fn main() {
 }
 ```
 
+<!-- column: 1 -->
 
 There are even specialized versions:
 ```rust
 // in the std::io module
 type Result<T> = Result<T, io::Error>;
 ```
+
 
 
 example:
@@ -290,6 +338,8 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 ```
+
+<!-- reset_layout -->
 
 lambdas
 
@@ -349,17 +399,23 @@ The defualt directory structure:
 ```bash +exec_replace
 cargo clean --manifest-path demo_for_presentation/Cargo.toml > /dev/null 2>&1
 rm -f demo_for_presentation/Cargo.lock
-eza -T --color=always -I demo_for_presentation/target demo_for_presentation # -I does not work
+eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation # -I does not work
 ```
 
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+
+```bash +exec_replace
+bat --color=always demo_for_presentation/src/main.rs
+```
+
+<!-- column: 1 -->
 
 ```bash +exec_replace
 bat --color=always demo_for_presentation/Cargo.toml
 ```
 
-```bash +exec_replace
-bat --color=always demo_for_presentation/src/main.rs
-```
+<!-- reset_layout -->
 
 running `cargo run --release`
 
