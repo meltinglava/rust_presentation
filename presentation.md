@@ -13,7 +13,7 @@ This presentation
 ---
 
 * What is Rust?
-* How to do memory safety without a garbage collector 
+* How to do memory safety without a garbage collector
 * Some cool features
 * Rust goals (speed, safety, and productivity)
 * unsafe
@@ -258,7 +258,7 @@ enum Result<T, E> {
 Traits
 ---
 
-A trait describes some functionality or capability. Think of them a bit like Java interfaces.  
+A trait describes some functionality or capability. Think of them a bit like Java interfaces.
 They are used mostly with generics and are crucial to safety.
 
 <!-- pause  -->
