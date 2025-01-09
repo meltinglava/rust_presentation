@@ -734,3 +734,9 @@ Closing remarks
 - You are going to have times where you "fight" the compiler.
   - If you feel that the compiler really fights you, you should consider how your model is affecting you.
 - Program so that only valid states are representable.
+
+<!-- end_slide -->
+Sources
+---
+
+Sources of slides can be found at [github.com/meltinglava/rust_presentation](https://github.com/meltinglava/rust_presentation)
