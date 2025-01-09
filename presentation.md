@@ -588,7 +588,7 @@ Fibonacci
 
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-```file {30-34|all} +line_numbers +exec
+```file {30-34|2-10,15-16,21-24|11,17,25|36-46|all} +line_numbers +exec
 path: fib_demo/src/first.rs
 language: rust
 ```
@@ -602,7 +602,7 @@ cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=first first
 
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-```file +line_numbers +exec
+```file {9-15|18-22|24-39|33|24-39|all} +line_numbers +exec
 path: fib_demo/src/second.rs
 language: rust
 ```
@@ -706,5 +706,3 @@ Closing remarks
 - You are going to have times where you "fight" the compiler.
   - If you feel that the compiler really fights you, you should consider how your model is affecting you.
 - Program so that only valid states are representable.
-
-<!-- end_slide -->
