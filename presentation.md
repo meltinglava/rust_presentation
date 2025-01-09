@@ -57,7 +57,7 @@ Ownership
 ---
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-```rust +exec +line_numbers
+```rust {all|2|4|6|all} +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
     // transfer ownership
@@ -68,7 +68,7 @@ fn main() {
 ```
 <!-- pause  -->
 <!-- column: 1 -->
-```rust +exec +line_numbers
+```rust {2|4-5|all} +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
     // transfer ownership
@@ -86,7 +86,7 @@ Immutable borrowing
 ---
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-```rust +exec +line_numbers
+```rust {all|4-5|all} +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
     // immutable borrow
@@ -99,7 +99,7 @@ fn main() {
 ```
 <!-- pause  -->
 <!-- column: 1 -->
-```rust +exec +line_numbers
+```rust {all|7|all} +exec +line_numbers
 fn main() {
     let v = vec![1, 2, 3];
     // immutable borrow
@@ -120,7 +120,7 @@ Mutable borrowing
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 
-```rust +exec +line_numbers
+```rust {2-6|all} +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
@@ -134,7 +134,7 @@ fn main() {
 ```
 <!-- pause  -->
 <!-- column: 1 -->
-```rust +exec +line_numbers
+```rust {4-8|all} +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
@@ -154,7 +154,7 @@ More mutable borrowing
 ---
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
-```rust +exec +line_numbers
+```rust {4-7|all} +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
@@ -169,7 +169,7 @@ fn main() {
 ```
 <!-- pause  -->
 <!-- column: 1 -->
-```rust +exec +line_numbers
+```rust {4-10} +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
@@ -179,8 +179,8 @@ fn main() {
 
     let c = &mut v;
     c.push(5);
-
     println!("{:?}", c);
+
     println!("{:?}", v);
 }
 ```
@@ -209,7 +209,7 @@ enum ApplicationState {
 
 But they have a powerful feature that a variant can hold a value.
 
-```rust +line_numbers
+```rust {all|3,5|all} +line_numbers
 enum ApplicationState {
     NotStarted,
     Running(RunningState),
@@ -286,7 +286,7 @@ Rust is a expression based language. `;` is used to seperate Expressions. The la
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 
-```rust +exec +line_numbers
+```rust {all|3-7|all} +exec +line_numbers
 fn main() {
     let something = true;
     let a = if something {
@@ -317,7 +317,7 @@ Using enums + generics + statments
 <!-- column_layout: [3, 4] -->
 <!-- column: 0 -->
 
-```rust +exec +line_numbers
+```rust {all|2-5|all} +exec +line_numbers
 fn check_last(s: &[u32]) {
     match s.last() {  // last() returns Option<u32>
         Some(entry) => println!("Last slice: {:?}, is: {}.", s, entry),
@@ -345,7 +345,7 @@ type Result<T> = Result<T, io::Error>;
 
 
 example:
-```rust +exec +line_numbers
+```rust {all|3-8|3|4-7|11-12|all} +exec +line_numbers
 use std::{io, fs::File, path::Path};
 
 fn read_length_of_file<P: AsRef<Path>>(path: P) -> io::Result<u64> {
@@ -367,7 +367,7 @@ fn main() -> io::Result<()> {
 
 lambdas
 
-```rust +exec +line_numbers
+```rust {3-12|all} +exec +line_numbers
 use std::{io::{self, BufReader, BufRead}, fs::File, path::Path};
 
 fn number_of_lines_starting_with_f<P: AsRef<Path>>(path: P) -> io::Result<usize> {
