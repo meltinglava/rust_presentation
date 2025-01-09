@@ -26,6 +26,7 @@ What is rust?
 ---
 
 * Rust is a general purpous, system level programming language
+<!-- pause  -->
 * Was started by Mozilla, with version 1.0 released in May 2015.
 
 <!-- end_slide -->
@@ -35,13 +36,16 @@ Rusts memory safety
 Ownership and borrowing
 
 * All values has one uniqe owner.
+<!-- pause  -->
 * The owner is resposible for freeing the underlying value once it goes out of
   scope.
+<!-- pause  -->
 * There are three ways of values be trasfered:
   1. Transfer of ownership
   2. Immutable boorow(s)
   3. Mutable borrow
 
+<!-- pause  -->
 Lifetimes
 
 * All owned values has a lifetime
@@ -62,6 +66,7 @@ fn main() {
     println!("{:?}", b);
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
@@ -92,6 +97,7 @@ fn main() {
     println!("{:?}", c);
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
@@ -126,6 +132,7 @@ fn main() {
     println!("{:?}", v);
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
@@ -160,6 +167,7 @@ fn main() {
     println!("{:?}", c);
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
@@ -196,6 +204,7 @@ enum ApplicationState {
 }
 ```
 
+<!-- pause  -->
 <!-- column: 1 -->
 
 But they have a powerful feature that a variant can hold a value.
@@ -208,11 +217,13 @@ enum ApplicationState {
     Failed(String),
 }
 ```
+<!-- pause  -->
 <!-- column_layout: [1] -->
 <!-- column: 0 -->
 
 Rust does not have any `null` like ideom by itself, but one can use an enum to atchive the same.
 
+<!-- pause  -->
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 
@@ -224,6 +235,7 @@ enum Option<T> {
     None,
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 and its sibling
 ```rust +line_numbers
@@ -240,19 +252,26 @@ Traits
 A trait describes some functionality / capability. Think of them abit like java interfaces.
 It is used mostly with generics and is crutial to safety.
 
-
+<!-- pause  -->
 
 Common traits
 - `Copy`
 - `Clone`
+<!-- pause  -->
 - `Iterator`
+<!-- pause  -->
 - `Sync`
 - `Send`
+<!-- pause  -->
 - `Drop`
+<!-- pause  -->
 - `From` and `Into`
+<!-- pause  -->
 - `Default`
+<!-- pause  -->
 - `Display`
 - `Debug`
+<!-- pause  -->
 - `Hash`
 - `Eq` and `PartialEq`
 - `Ord` and `PartialOrd`
@@ -262,6 +281,7 @@ Expressions
 ---
 
 Rust is a expression based language. `;` is used to seperate Expressions. The last expression in a block is returned.
+<!-- pause  -->
 
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
@@ -277,6 +297,7 @@ fn main() {
     println!("{}", a);
 }
 ```
+<!-- pause  -->
 <!-- column: 1 -->
 ```rust +exec +line_numbers
 fn main() {
@@ -292,6 +313,7 @@ fn main() {
 <!-- end_slide -->
 Using enums + generics + statments
 ---
+<!-- pause  -->
 <!-- column_layout: [3, 4] -->
 <!-- column: 0 -->
 
@@ -313,6 +335,7 @@ fn main() {
 
 <!-- column: 1 -->
 
+<!-- pause  -->
 There are even specialized versions:
 ```rust
 // in the std::io module
@@ -340,6 +363,7 @@ fn main() -> io::Result<()> {
 ```
 
 <!-- reset_layout -->
+<!-- pause  -->
 
 lambdas
 
@@ -395,6 +419,7 @@ Cargo is rust's build system and dependencies manager.
 `cargo new demo_for_presentation`
 
 
+<!-- pause  -->
 The defualt directory structure:
 ```bash +exec_replace
 cargo clean --manifest-path demo_for_presentation/Cargo.toml > /dev/null 2>&1
@@ -402,6 +427,7 @@ rm -f demo_for_presentation/Cargo.lock
 eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation # -I does not work
 ```
 
+<!-- pause  -->
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 
@@ -409,6 +435,7 @@ eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation # -
 bat --color=always demo_for_presentation/src/main.rs
 ```
 
+<!-- pause  -->
 <!-- column: 1 -->
 
 ```bash +exec_replace
@@ -416,6 +443,7 @@ bat --color=always demo_for_presentation/Cargo.toml
 ```
 
 <!-- reset_layout -->
+<!-- pause  -->
 
 running `cargo run --release`
 
@@ -424,6 +452,7 @@ cargo clean --manifest-path demo_for_presentation/Cargo.toml > /dev/null 2>&1
 cargo run --release --manifest-path demo_for_presentation/Cargo.toml --color=always
 ```
 
+<!-- pause  -->
 To install `rustc` and `cargo` use `rustup`. `rustup` is the toolchain manager for rust.
 
 Get `rustup` from either:
@@ -434,18 +463,25 @@ Get `rustup` from either:
 Stability
 ---
 
+<!-- pause  -->
 Rust garanties that any code that compiles with a stable version of the compiler, shall compile with all later versions of the compiler.
 
+<!-- pause  -->
 This means that you can always upgrade your compiler to get the latest features, bug fixes, better build preformace...
 
+<!-- pause  -->
 There is a new release of rust every 6 weeks.
 
+<!-- pause  -->
 To ensure that changes can be made, there is editions. The rustc compiler knows how to compile its current edition and all older editions.
 
+<!-- pause  -->
 The current edition is 2021. The 2024 edition is in its final stages and are going to be released 20 February 2025 in version 1.85.0.
 
+<!-- pause  -->
 An edition is defined on a crate level, with cross edition builds being fully supported.
 
+<!-- pause  -->
 Upgrading to the next edition is automated by running `cargo fix --edition`
 
 <!-- end_slide -->
@@ -459,12 +495,14 @@ This is what [](https://rust-lang.org) has to say.
 - Easily integrates with other languages.
 - Can target everything from preformace heavy / critical devices, to operating systems and down to embedded devices.
 
+<!-- pause  -->
 #### Reliability
 
 - Memory-safety.
 - Thread-safety.
 - Eliminates many classes of bugs at compile-time.
 
+<!-- pause  -->
 #### Productivity
 - Excellent documentation.
 - Friendly compiler & clear error messages.
@@ -483,9 +521,11 @@ Should you write it in rust?
   - GUI-s [](https://areweguiyet.com/)
 - Demand for knowledge (developers) currently higher than the supply.
 
+<!-- pause  -->
 #### However
 - If your target domain includes something that somewhat resembles the ownership model of rust, you should probably write it in rust.
 
+<!-- pause  -->
 ##### Note.
 What is not on this slide?
 
@@ -495,17 +535,21 @@ What is not on this slide?
 
 A common misconception is that unsafe is an 'escape hatch'.
 
+<!-- pause  -->
 Unsafe allows three things.
  1. Use FFI.
  2. Call unsafe functions.
  3. Dereference a raw pointer.
 
+<!-- pause  -->
 ### The overarching usecase.
 There is some invariant (usually runtime reliant), that makes this ideom safe. (think vector, mutex...)
 
 
+<!-- pause  -->
 ### When writing unsafe code
 - One have to make sure that any unsafe code is valid for ANY and ALL safe code.
+<!-- pause  -->
 - One can use the garanties / rules of safe rust code to make safe `unsafe` abstractions.
 
 <!-- end_slide -->
@@ -514,16 +558,18 @@ Following the rules of rust.
 
 Because of the rules (espesially ownership / borrowing) of rust, one can get nice api-s that is not possible in other languages. 
 
+<!-- pause  -->
 #### [`HashMap::entry`](https://doc.rust-lang.org/stable/std/collections/hash_map/struct.HashMap.html#method.entry)
 - This API works because the `Entry` type returned by the `entry` function holds a mutable reference to the hashmap.
 
+<!-- pause  -->
 #### [`Mutex`](https://doc.rust-lang.org/stable/std/sync/struct.Mutex.html)
-- The mutex type in rust takes ownership of the value that it protects. 
-  - Unlike most other languages a mutex is just a lock that locks itself.
+- The mutex type in rust takes ownership of the value that it protects.
+  - Unlike most other languages where a mutex is just a lock that locks itself.
     - Hence there is nothing connecting the mutex to the value and it is easy to suddenly read the value without having locked the lock.
 - The `Mutex::lock` method returns a `MutexGuard` containg a mutable reference to the protected value.
   - When the `MutexGuard` is dropped it releases the lock (simular to cpp mutexguard).
-    - But it does not ensure that there is no references left behind.
+    - As the mutable reference is owned by the `MutexGuard`, there cannot be any references left behind after its been dropped.
 
 <!-- end_slide -->
 Why does people like to write rust.
