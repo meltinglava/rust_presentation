@@ -6,14 +6,14 @@ theme:
   override:
     code:
       alignment: left
-      background: false
+      background: true
 ---
 
 This presentation
 ---
 
 * What is rust?
-* How to do memory safety without a garbage collector?
+* How to do memory safety without a garbage collection 
 * Some cool features
 * Rust goals (speed, safety and productivity)
 * unsafe
@@ -169,7 +169,7 @@ fn main() {
 ```
 <!-- pause  -->
 <!-- column: 1 -->
-```rust {4-10} +exec +line_numbers
+```rust {4-10|all} +exec +line_numbers
 fn main() {
     let mut v = vec![1, 2, 3];
     // mutable borrow
@@ -185,8 +185,17 @@ fn main() {
 }
 ```
 
-TODO: Explain why this helps you.
+<!-- end_slide -->
+Safe code
+---
 
+These rules being enforced at compile time eliminates classes of memory bugs for beeing possible.
+
+Example of bugs not possible:
+- Use after free
+- Double free
+- Dangeling pointers
+- Data races (with and without multi-threading)
 <!-- end_slide -->
 
 Rust enums
@@ -319,7 +328,7 @@ Using enums + generics + statments
 
 ```rust {all|2-5|all} +exec +line_numbers
 fn check_last(s: &[u32]) {
-    match s.last() {  // last() returns Option<u32>
+    match s.last() {  // last() returns Option<&u32>
         Some(entry) => println!("Last slice: {:?}, is: {}.", s, entry),
         None => println!("The slice is empty."),
     };
@@ -431,15 +440,17 @@ eza -Ta --color=always -I demo_for_presentation/target demo_for_presentation # -
 <!-- column_layout: [1, 1] -->
 <!-- column: 0 -->
 
-```bash +exec_replace
-bat --color=always demo_for_presentation/src/main.rs
+```file +line_numbers
+path: demo_for_presentation/src/main.rs
+language: rust
 ```
 
 <!-- pause  -->
 <!-- column: 1 -->
 
-```bash +exec_replace
-bat --color=always demo_for_presentation/Cargo.toml
+```file +line_numbers
+path: demo_for_presentation/Cargo.toml
+language: toml
 ```
 
 <!-- reset_layout -->
@@ -586,6 +597,120 @@ Demo time
 
 In this demo we are going to do an easy normal task, see where it fails, to then fix it properly.
 
+<!-- end_slide -->
+Fibonacci
+---
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file {30-34|all} +line_numbers +exec
+path: fib_demo/src/first.rs
+language: rust
+```
+<!-- pause  -->
+<!-- column: 1 -->
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=first first
+```
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers +exec
+path: fib_demo/src/second.rs
+language: rust
+```
+<!-- pause  -->
+<!-- column: 1 -->
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=second second
+```
+
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers +exec
+path: fib_demo/src/third.rs
+language: rust
+```
+<!-- column: 1 -->
+
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers
+path: fib_demo/src/fourth.rs
+language: rust
+```
+<!-- pause  -->
+<!-- column: 1 -->
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=fourth
+```
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers
+path: fib_demo/src/fifth.rs
+language: rust
+```
+<!-- pause  -->
+<!-- column: 1 -->
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=fifth
+```
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers +exec
+path: fib_demo/src/sixth.rs
+language: rust
+```
+<!-- pause  -->
+<!-- column: 1 -->
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=sixth
+```
+<!-- reset_layout -->
+<!-- end_slide -->
+
+<!-- column_layout: [1, 1] -->
+<!-- column: 0 -->
+```file +line_numbers
+path: fib_demo/src/seventh.rs
+language: rust
+```
+<!-- column: 1 -->
+### Lets add a dependency
+```bash
+cargo add num
+```
+Will add this in the dependencies section of the `Cargo.toml` file
+```toml
+[dependencies]
+num = "0.4.3"
+```
+<!-- pause  -->
+### Test
+```bash +exec_replace
+cargo test --color=always --manifest-path=fib_demo/Cargo.toml --bin=seventh
+```
+<!-- pause  -->
+### Result
+```bash +exec_replace
+cargo run --color=always --manifest-path=fib_demo/Cargo.toml --bin=seventh
+```
+
+<!-- reset_layout -->
 <!-- end_slide -->
 Closing remarks
 ---

@@ -59,8 +59,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_fib_fourth() {
-        let actual: Vec<usize> = fib::Fib::new(0, 1).take(10).collect();
+    fn test_fib_seventh() {
+        let actual: Vec<usize> = fib::Fib::default().take(10).collect();
         let expected = vec![0, 1, 1, 2, 3, 5, 8, 13, 21, 34];
         assert_eq!(actual, expected);
     }

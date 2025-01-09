@@ -1,3 +1,4 @@
+#[allow(unused_variables, dead_code)]
 mod fib {
     pub struct Fib {
         current: usize,
@@ -6,7 +7,7 @@ mod fib {
     }
 
     impl Fib {
-        pub fn new(current: usize, former: usize) -> Self {
+        pub fn new(former: usize, current: usize) -> Self {
             todo!()
         }
     }
